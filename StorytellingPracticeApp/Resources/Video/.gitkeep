@@ -1,0 +1,7 @@
+# Video Folder
+# Place all video files here (MP4, MOV, etc.)
+# 
+# Usage in code:
+# let url = Bundle.main.url(forResource: "videoName", withExtension: "mp4")
+# 
+# Note: Add video files to Xcode project and ensure they're included in the target

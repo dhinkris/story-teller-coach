@@ -1,0 +1,7 @@
+# Audio Folder
+# Place all audio files here (MP3, M4A, WAV, etc.)
+# 
+# Usage in code:
+# let url = Bundle.main.url(forResource: "audioName", withExtension: "m4a")
+# 
+# Note: Add audio files to Xcode project and ensure they're included in the target

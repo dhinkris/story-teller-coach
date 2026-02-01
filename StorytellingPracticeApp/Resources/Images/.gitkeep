@@ -1,0 +1,7 @@
+# Images Folder
+# Place all image assets here (PNG, JPEG, HEIC, etc.)
+# 
+# Usage in code:
+# Image("imageName")
+# or
+# UIImage(named: "imageName")

@@ -1,0 +1,7 @@
+# GIFs Folder
+# Place all animated GIF files here
+# 
+# Usage in code:
+# For displaying GIFs, you may need to use a third-party library or convert to video
+# 
+# Note: Add GIF files to Xcode project and ensure they're included in the target
