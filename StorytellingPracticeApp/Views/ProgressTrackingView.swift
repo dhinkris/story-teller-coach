@@ -4,141 +4,194 @@ struct ProgressTrackingView: View {
     @StateObject private var progressService = ProgressDataService()
     @State private var selectedPeriod: ProgressDataService.TimePeriod = .all
     @State private var showClearConfirmation = false
-    
+
     private var filteredRecords: [ProgressRecord] {
         progressService.getRecords(for: selectedPeriod)
     }
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.clayBackground
-                    .ignoresSafeArea()
-                
+                Color.clayBackground.ignoresSafeArea()
+
                 ScrollView {
-                    VStack(spacing: 24) {
-                        // Overall Progress Card
+                    VStack(spacing: 20) {
+                        // Period selector at top
+                        PeriodSelector(selectedPeriod: $selectedPeriod)
+
+                        // Overall stats
                         OverallProgressCard(progress: progressService.overallProgress)
-                        
-                        // Radar Chart
+
+                        // Skill radar
                         if !progressService.records.isEmpty {
                             RadarChartCard(progress: progressService.overallProgress)
                         }
-                        
-                        // Progress Chart
-                        if !filteredRecords.isEmpty {
+
+                        // Progress over time
+                        if filteredRecords.count > 1 {
                             ProgressLineChart(records: filteredRecords)
                         }
-                        
-                        // History Section
+
+                        // Session history
                         HistorySection(
                             records: filteredRecords,
-                            onDelete: { record in
-                                progressService.deleteRecord(record)
-                            }
+                            onDelete: { record in progressService.deleteRecord(record) }
                         )
-                        
-                        // Period Selector
-                        PeriodSelector(selectedPeriod: $selectedPeriod)
-                        
-                        // Clear All Button
+
+                        // Clear all
                         if !progressService.records.isEmpty {
-                            Button(action: {
-                                showClearConfirmation = true
-                            }) {
-                                HStack {
+                            Button(action: { showClearConfirmation = true }) {
+                                HStack(spacing: 7) {
                                     Image(systemName: "trash")
                                     Text("Clear All Progress")
                                 }
                                 .font(.subheadline)
-                                .foregroundColor(.red)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color.clayDanger)
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .background(
                                     RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.red.opacity(0.1))
+                                        .fill(Color.clayDanger.opacity(0.08))
                                 )
                             }
-                            .padding(.top, 8)
+                            .padding(.top, 4)
                         }
                     }
-                    .padding(24)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 16)
                 }
             }
-            .navigationTitle("Progress")
+            .navigationTitle("Journey")
             .navigationBarTitleDisplayMode(.large)
             .alert("Clear All Progress", isPresented: $showClearConfirmation) {
                 Button("Cancel", role: .cancel) { }
-                Button("Clear", role: .destructive) {
+                Button("Clear All", role: .destructive) {
                     progressService.clearAllRecords()
                 }
             } message: {
-                Text("Are you sure you want to delete all progress data? This action cannot be undone.")
+                Text("This will permanently delete all your session history and scores.")
             }
         }
     }
 }
 
+// MARK: - Period Selector
+
+struct PeriodSelector: View {
+    @Binding var selectedPeriod: ProgressDataService.TimePeriod
+
+    var body: some View {
+        HStack(spacing: 8) {
+            periodButton("All",   period: .all)
+            periodButton("Week",  period: .week)
+            periodButton("Month", period: .month)
+            periodButton("Year",  period: .year)
+        }
+    }
+
+    @ViewBuilder
+    private func periodButton(_ label: String, period: ProgressDataService.TimePeriod) -> some View {
+        let isSelected = selectedPeriod == period
+        Button(action: {
+            withAnimation(.spring(response: 0.28)) { selectedPeriod = period }
+        }) {
+            Text(label)
+                .font(.subheadline)
+                .fontWeight(.semibold)
+                .foregroundColor(isSelected ? .white : .primary)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .frame(maxWidth: .infinity)
+                .clayButton(isSelected: isSelected, cornerRadius: 20)
+        }
+    }
+}
+
+// MARK: - Overall Progress Card
+
 struct OverallProgressCard: View {
     let progress: OverallProgress
-    
+
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 18) {
             HStack {
-                Text("Overall Progress")
+                Text("Overview")
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
+                if progress.totalSessions > 0 {
+                    Text(performanceLabel(for: progress.averageOverall))
+                        .font(.caption)
+                        .fontWeight(.bold)
+                        .foregroundColor(performanceColor(for: progress.averageOverall))
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 5)
+                        .background(
+                            Capsule()
+                                .fill(performanceColor(for: progress.averageOverall).opacity(0.12))
+                        )
+                }
             }
-            
-            HStack(spacing: 20) {
+
+            HStack(spacing: 12) {
                 StatBox(
                     title: "Sessions",
                     value: "\(progress.totalSessions)",
-                    icon: "calendar"
+                    icon: "calendar",
+                    color: Color.clayAccent
                 )
-                
                 StatBox(
                     title: "Avg Score",
                     value: "\(Int(progress.averageOverall * 100))%",
-                    icon: "star.fill"
+                    icon: "star.fill",
+                    color: Color.clayGold
                 )
-                
                 StatBox(
-                    title: "Practice Time",
+                    title: "Practice",
                     value: formatTime(progress.totalPracticeTime),
-                    icon: "clock.fill"
+                    icon: "clock.fill",
+                    color: Color.claySuccess
                 )
             }
-            
+
             if let lastDate = progress.lastPracticeDate {
-                HStack {
+                HStack(spacing: 7) {
                     Image(systemName: "clock.arrow.circlepath")
+                        .font(.system(size: 12))
                         .foregroundColor(.secondary)
-                    Text("Last practice: \(formatDate(lastDate))")
+                    Text("Last session: \(formatDate(lastDate))")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+            } else {
+                HStack(spacing: 7) {
+                    Image(systemName: "sparkles")
+                        .font(.system(size: 12))
+                        .foregroundColor(Color.clayAccent)
+                    Text("Complete your first session to start tracking")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                     Spacer()
                 }
             }
         }
-        .clayCard(cornerRadius: 28, padding: 24)
+        .clayCard(cornerRadius: 28, padding: 22)
     }
-    
+
     private func formatTime(_ time: TimeInterval) -> String {
         let hours = Int(time) / 3600
         let minutes = (Int(time) % 3600) / 60
-        if hours > 0 {
-            return "\(hours)h \(minutes)m"
-        }
+        if hours > 0 { return "\(hours)h \(minutes)m" }
         return "\(minutes)m"
     }
-    
+
     private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+        let f = DateFormatter()
+        f.dateStyle = .medium
+        f.timeStyle = .none
+        return f.string(from: date)
     }
 }
 
@@ -146,17 +199,17 @@ struct StatBox: View {
     let title: String
     let value: String
     let icon: String
-    
+    let color: Color
+
     var body: some View {
         VStack(spacing: 8) {
             Image(systemName: icon)
-                .font(.title3)
-                .foregroundColor(Color.clayAccent)
-            
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundColor(color)
+
             Text(value)
-                .font(.title3)
-                .fontWeight(.bold)
-            
+                .font(.system(size: 18, weight: .bold, design: .rounded))
+
             Text(title)
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -164,24 +217,26 @@ struct StatBox: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
         .background(
-            RoundedRectangle(cornerRadius: 20)
-                .fill(Color.clayAccent.opacity(0.1))
+            RoundedRectangle(cornerRadius: 18)
+                .fill(color.opacity(0.08))
         )
     }
 }
 
+// MARK: - Radar Chart Card
+
 struct RadarChartCard: View {
     let progress: OverallProgress
-    
+
     var body: some View {
-        VStack(spacing: 20) {
+        VStack(spacing: 18) {
             HStack {
-                Text("Skills Overview")
+                Text("Skills Radar")
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
             }
-            
+
             RadarChartView(
                 values: [
                     progress.averageSimilarity,
@@ -190,39 +245,39 @@ struct RadarChartCard: View {
                     progress.averageVocabulary,
                     progress.averageOverall
                 ],
-                labels: [
-                    "Similarity",
-                    "Fluency",
-                    "Coherence",
-                    "Vocabulary",
-                    "Overall"
-                ],
+                labels: ["Fidelity", "Delivery", "Flow", "Expression", "Overall"],
                 maxValue: 1.0
             )
-            .frame(height: 300)
+            .frame(height: 280)
         }
-        .clayCard(cornerRadius: 28, padding: 24)
+        .clayCard(cornerRadius: 28, padding: 22)
     }
 }
 
+// MARK: - Progress Line Chart
+
 struct ProgressLineChart: View {
     let records: [ProgressRecord]
-    
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 20) {
+        VStack(alignment: .leading, spacing: 18) {
             HStack {
-                Text("Progress Over Time")
+                Text("Score Trend")
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
+                Text("\(records.count) sessions")
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(.secondary)
             }
-            
+
             GeometryReader { geometry in
                 let width = geometry.size.width
                 let height = geometry.size.height
                 let maxScore: CGFloat = 100
                 let minScore: CGFloat = 0
-                
+
                 ZStack {
                     // Grid lines
                     ForEach(0..<5) { level in
@@ -231,227 +286,196 @@ struct ProgressLineChart: View {
                             path.move(to: CGPoint(x: 0, y: y))
                             path.addLine(to: CGPoint(x: width, y: y))
                         }
-                        .stroke(Color.gray.opacity(0.2), lineWidth: 1)
-                    }
-                    
-                    // Y-axis labels
-                    ForEach(0..<5) { level in
-                        let y = height * CGFloat(level) / 4.0
-                        let value = maxScore - (maxScore - minScore) * CGFloat(level) / 4.0
-                        Text("\(Int(value))%")
-                            .font(.caption)
+                        .stroke(Color.claySurface, lineWidth: 1)
+
+                        Text("\(Int(maxScore - (maxScore - minScore) * CGFloat(level) / 4.0))%")
+                            .font(.system(size: 10))
                             .foregroundColor(.secondary)
-                            .position(x: 30, y: y)
+                            .position(x: 18, y: y)
                     }
-                    
+
                     if records.count > 1 {
-                        // Line path
-                        Path { path in
-                            for (index, record) in records.enumerated() {
-                                let x = width * CGFloat(index) / CGFloat(records.count - 1)
-                                let score = CGFloat(record.metrics.overallScore * 100)
-                                let normalizedScore = (score - minScore) / (maxScore - minScore)
-                                let y = height * (1 - normalizedScore)
-                                
-                                if index == 0 {
-                                    path.move(to: CGPoint(x: x, y: y))
-                                } else {
-                                    path.addLine(to: CGPoint(x: x, y: y))
-                                }
-                            }
-                        }
-                        .stroke(Color.clayAccent, lineWidth: 3)
-                        
-                        // Area under curve
+                        // Area fill
                         Path { path in
                             path.move(to: CGPoint(x: 0, y: height))
-                            
                             for (index, record) in records.enumerated() {
                                 let x = width * CGFloat(index) / CGFloat(records.count - 1)
                                 let score = CGFloat(record.metrics.overallScore * 100)
-                                let normalizedScore = (score - minScore) / (maxScore - minScore)
-                                let y = height * (1 - normalizedScore)
+                                let y = height * (1 - (score - minScore) / (maxScore - minScore))
                                 path.addLine(to: CGPoint(x: x, y: y))
                             }
-                            
                             path.addLine(to: CGPoint(x: width, y: height))
                             path.closeSubpath()
                         }
                         .fill(
                             LinearGradient(
-                                colors: [Color.clayAccent.opacity(0.3), Color.clayAccent.opacity(0.05)],
+                                colors: [Color.clayAccent.opacity(0.25), Color.clayAccent.opacity(0.04)],
                                 startPoint: .top,
                                 endPoint: .bottom
                             )
                         )
-                        
+
+                        // Line
+                        Path { path in
+                            for (index, record) in records.enumerated() {
+                                let x = width * CGFloat(index) / CGFloat(records.count - 1)
+                                let score = CGFloat(record.metrics.overallScore * 100)
+                                let y = height * (1 - (score - minScore) / (maxScore - minScore))
+                                index == 0 ? path.move(to: CGPoint(x: x, y: y)) : path.addLine(to: CGPoint(x: x, y: y))
+                            }
+                        }
+                        .stroke(Color.clayAccent, style: StrokeStyle(lineWidth: 2.5, lineJoin: .round))
+
                         // Data points
                         ForEach(Array(records.enumerated()), id: \.element.id) { index, record in
                             let x = width * CGFloat(index) / CGFloat(records.count - 1)
                             let score = CGFloat(record.metrics.overallScore * 100)
-                            let normalizedScore = (score - minScore) / (maxScore - minScore)
-                            let y = height * (1 - normalizedScore)
-                            
-                            Circle()
-                                .fill(Color.clayAccent)
-                                .frame(width: 8, height: 8)
-                                .position(x: x, y: y)
+                            let y = height * (1 - (score - minScore) / (maxScore - minScore))
+
+                            ZStack {
+                                Circle()
+                                    .fill(Color.clayCard)
+                                    .frame(width: 10, height: 10)
+                                Circle()
+                                    .fill(Color.clayAccent)
+                                    .frame(width: 6, height: 6)
+                            }
+                            .position(x: x, y: y)
                         }
                     }
                 }
             }
-            .frame(height: 200)
+            .frame(height: 180)
         }
-        .clayCard(cornerRadius: 28, padding: 24)
+        .clayCard(cornerRadius: 28, padding: 22)
     }
 }
+
+// MARK: - History Section
 
 struct HistorySection: View {
     let records: [ProgressRecord]
     let onDelete: (ProgressRecord) -> Void
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             HStack {
-                Text("History")
+                Text("Session History")
                     .font(.title2)
                     .fontWeight(.bold)
                 Spacer()
-                Text("\(records.count) sessions")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-            }
-            
-            if records.isEmpty {
-                VStack(spacing: 12) {
-                    Image(systemName: "chart.line.uptrend.xyaxis")
-                        .font(.system(size: 40))
-                        .foregroundColor(.secondary.opacity(0.6))
-                    Text("No records yet")
+                if !records.isEmpty {
+                    Text("\(records.count) sessions")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
+            }
+
+            if records.isEmpty {
+                VStack(spacing: 14) {
+                    Image(systemName: "chart.line.uptrend.xyaxis")
+                        .font(.system(size: 38))
+                        .foregroundColor(.secondary.opacity(0.4))
+                    Text("No sessions yet")
+                        .font(.headline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.secondary)
+                    Text("Complete a retelling or practice session to start your journey.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .lineSpacing(3)
+                }
                 .frame(maxWidth: .infinity)
-                .padding(.vertical, 40)
+                .padding(.vertical, 36)
             } else {
                 ForEach(records.sorted(by: { $0.date > $1.date })) { record in
                     HistoryRow(record: record, onDelete: { onDelete(record) })
                 }
             }
         }
-        .clayCard(cornerRadius: 28, padding: 24)
+        .clayCard(cornerRadius: 28, padding: 22)
     }
 }
 
 struct HistoryRow: View {
     let record: ProgressRecord
     let onDelete: () -> Void
-    
+
+    private var sessionIcon: String {
+        record.type == .storyRetelling ? "book.fill" : "bolt.fill"
+    }
+
+    private var sessionLabel: String {
+        record.type == .storyRetelling ? "Story Retelling" : "Open Practice"
+    }
+
     var body: some View {
-        HStack(spacing: 16) {
-            // Date
-            VStack(alignment: .leading, spacing: 4) {
-                Text(formatDate(record.date))
+        HStack(spacing: 14) {
+            // Session type icon
+            ZStack {
+                Circle()
+                    .fill(Color.clayAccent.opacity(0.10))
+                    .frame(width: 38, height: 38)
+                Image(systemName: sessionIcon)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundColor(Color.clayAccent)
+            }
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(sessionLabel)
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                Text(record.type == .storyRetelling ? "Story Retelling" : "Free Practice")
+                    .foregroundColor(.primary)
+
+                Text(formatDate(record.date))
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
-            
+
             Spacer()
-            
-            // Score
-            VStack(alignment: .trailing, spacing: 4) {
+
+            VStack(alignment: .trailing, spacing: 3) {
                 Text("\(Int(record.metrics.overallScore * 100))%")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(scoreColor(record.metrics.overallScore))
-                
+                    .font(.system(size: 16, weight: .bold, design: .rounded))
+                    .foregroundColor(performanceColor(for: record.metrics.overallScore))
+
                 HStack(spacing: 4) {
                     Image(systemName: "clock.fill")
-                        .font(.system(size: 8))
+                        .font(.system(size: 9))
                     Text(formatDuration(record.duration))
-                        .font(.caption)
+                        .font(.caption2)
+                        .fontWeight(.medium)
                 }
                 .foregroundColor(.secondary)
             }
-            
+
             Button(action: onDelete) {
                 Image(systemName: "trash")
-                    .font(.system(size: 14))
-                    .foregroundColor(.red.opacity(0.7))
+                    .font(.system(size: 13))
+                    .foregroundColor(Color.clayDanger.opacity(0.6))
             }
+            .padding(.leading, 4)
         }
-        .padding(.vertical, 12)
-        .padding(.horizontal, 16)
+        .padding(.vertical, 10)
+        .padding(.horizontal, 14)
         .background(
             RoundedRectangle(cornerRadius: 16)
-                .fill(Color.clayAccent.opacity(0.05))
+                .fill(Color.claySurface.opacity(0.6))
         )
     }
-    
+
     private func formatDate(_ date: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter.string(from: date)
+        let f = DateFormatter()
+        f.dateStyle = .short
+        f.timeStyle = .short
+        return f.string(from: date)
     }
-    
+
     private func formatDuration(_ duration: TimeInterval) -> String {
-        let minutes = Int(duration) / 60
-        let seconds = Int(duration) % 60
-        return String(format: "%d:%02d", minutes, seconds)
-    }
-    
-    private func scoreColor(_ score: Double) -> Color {
-        if score >= 0.8 {
-            return .green
-        } else if score >= 0.6 {
-            return .orange
-        } else {
-            return .red
-        }
-    }
-}
-
-struct PeriodSelector: View {
-    @Binding var selectedPeriod: ProgressDataService.TimePeriod
-    
-    var body: some View {
-        HStack(spacing: 12) {
-            PeriodButton(title: "All", period: .all, selected: selectedPeriod == .all) {
-                selectedPeriod = .all
-            }
-            PeriodButton(title: "Week", period: .week, selected: selectedPeriod == .week) {
-                selectedPeriod = .week
-            }
-            PeriodButton(title: "Month", period: .month, selected: selectedPeriod == .month) {
-                selectedPeriod = .month
-            }
-            PeriodButton(title: "Year", period: .year, selected: selectedPeriod == .year) {
-                selectedPeriod = .year
-            }
-        }
-    }
-}
-
-struct PeriodButton: View {
-    let title: String
-    let period: ProgressDataService.TimePeriod
-    let selected: Bool
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .foregroundColor(selected ? .white : .primary)
-                .padding(.horizontal, 16)
-                .padding(.vertical, 10)
-                .clayButton(isSelected: selected, cornerRadius: 20)
-        }
+        let m = Int(duration) / 60
+        let s = Int(duration) % 60
+        return String(format: "%d:%02d", m, s)
     }
 }
 

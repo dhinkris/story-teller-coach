@@ -8,5 +8,11 @@
 	<string>This app needs speech recognition to transcribe your recordings.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to generate images for prompts.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<!-- Allow HTTP to localhost for Ollama (llama3.1:8b at port 11434) -->
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

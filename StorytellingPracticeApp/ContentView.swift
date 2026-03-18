@@ -1,37 +1,47 @@
 import SwiftUI
 
+// MARK: - Shared App State
+
+class AppState: ObservableObject {
+    @Published var selectedTab: Int = 0
+    @Published var pendingRetellingStory: Story? = nil
+}
+
 struct ContentView: View {
+    @StateObject private var appState = AppState()
+
     var body: some View {
         MainTabView()
+            .environmentObject(appState)
     }
 }
 
 struct MainTabView: View {
-    @State private var selectedTab = 0
-    
+    @EnvironmentObject var appState: AppState
+
     var body: some View {
-        TabView(selection: $selectedTab) {
+        TabView(selection: $appState.selectedTab) {
             StoryConsumptionView()
                 .tabItem {
-                    Label("Stories", systemImage: "book.fill")
+                    Label("Library", systemImage: "books.vertical.fill")
                 }
                 .tag(0)
-            
+
             StoryRetellingView()
                 .tabItem {
-                    Label("Retelling", systemImage: "mic.fill")
+                    Label("Retell", systemImage: "mic.fill")
                 }
                 .tag(1)
-            
+
             FreePracticeView()
                 .tabItem {
-                    Label("Practice", systemImage: "sparkles")
+                    Label("Practice", systemImage: "bolt.fill")
                 }
                 .tag(2)
-            
+
             ProgressTrackingView()
                 .tabItem {
-                    Label("Progress", systemImage: "chart.bar.fill")
+                    Label("Journey", systemImage: "chart.line.uptrend.xyaxis")
                 }
                 .tag(3)
         }

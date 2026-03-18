@@ -27,6 +27,19 @@
 		AA0000000000000000000040 /* ProgressDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000041 /* ProgressDataService.swift */; };
 		AA0000000000000000000042 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000043 /* RadarChartView.swift */; };
 		AA0000000000000000000044 /* ProgressTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000045 /* ProgressTrackingView.swift */; };
+		AA0000000000000000000046 /* LlamaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000047 /* LlamaService.swift */; };
+		AA0000000000000000000048 /* LlamaBridge.h in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000049 /* LlamaBridge.h */; };
+		AA000000000000000000004A /* KokoroTTSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004B /* KokoroTTSService.swift */; };
+		AA000000000000000000004C /* story_ai_revolution.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004D /* story_ai_revolution.mp3 */; };
+		AA000000000000000000004E /* story_vintage_dress.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004F /* story_vintage_dress.mp3 */; };
+		AA0000000000000000000050 /* story_enchanted_forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000051 /* story_enchanted_forest.mp3 */; };
+		AA0000000000000000000052 /* story_coffee_shop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000053 /* story_coffee_shop.mp3 */; };
+		AA0000000000000000000054 /* story_comeback.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000055 /* story_comeback.mp3 */; };
+		AA0000000000000000000057 /* thumb_ai_revolution.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000058 /* thumb_ai_revolution.png */; };
+		AA0000000000000000000059 /* thumb_vintage_dress.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005A /* thumb_vintage_dress.png */; };
+		AA000000000000000000005B /* thumb_enchanted_forest.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005C /* thumb_enchanted_forest.png */; };
+		AA000000000000000000005D /* thumb_coffee_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005E /* thumb_coffee_shop.png */; };
+		AA000000000000000000005F /* thumb_comeback.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000060 /* thumb_comeback.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +65,19 @@
 		AA0000000000000000000041 /* ProgressDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDataService.swift; sourceTree = "<group>"; };
 		AA0000000000000000000043 /* RadarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadarChartView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000045 /* ProgressTrackingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTrackingView.swift; sourceTree = "<group>"; };
+		AA0000000000000000000047 /* LlamaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaService.swift; sourceTree = "<group>"; };
+		AA0000000000000000000049 /* LlamaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LlamaBridge.h; sourceTree = "<group>"; };
+		AA000000000000000000004B /* KokoroTTSService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokoroTTSService.swift; sourceTree = "<group>"; };
+		AA000000000000000000004D /* story_ai_revolution.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_ai_revolution.mp3; sourceTree = "<group>"; };
+		AA000000000000000000004F /* story_vintage_dress.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_vintage_dress.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000051 /* story_enchanted_forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_enchanted_forest.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000053 /* story_coffee_shop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_coffee_shop.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000055 /* story_comeback.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_comeback.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000058 /* thumb_ai_revolution.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_ai_revolution.png; sourceTree = "<group>"; };
+		AA000000000000000000005A /* thumb_vintage_dress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_vintage_dress.png; sourceTree = "<group>"; };
+		AA000000000000000000005C /* thumb_enchanted_forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_enchanted_forest.png; sourceTree = "<group>"; };
+		AA000000000000000000005E /* thumb_coffee_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_coffee_shop.png; sourceTree = "<group>"; };
+		AA0000000000000000000060 /* thumb_comeback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_comeback.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,11 +112,14 @@
 			children = (
 				AA0000000000000000000002 /* StorytellingPracticeApp.swift */,
 				AA0000000000000000000004 /* ContentView.swift */,
+				AA0000000000000000000049 /* LlamaBridge.h */,
 				AA0000000000000000000038 /* Models */,
 				AA0000000000000000000039 /* Views */,
 				AA000000000000000000003A /* Services */,
 				AA000000000000000000003B /* Utilities */,
 				AA0000000000000000000006 /* Assets.xcassets */,
+				AA0000000000000000000056 /* Audio */,
+				AA0000000000000000000061 /* Images */,
 				AA0000000000000000000017 /* Preview Content */,
 				AA0000000000000000000012 /* Info.plist */,
 			);
@@ -127,8 +156,10 @@
 				AA0000000000000000000031 /* AudioRecorderService.swift */,
 				AA0000000000000000000033 /* SpeechRecognitionService.swift */,
 				AA0000000000000000000035 /* LLMService.swift */,
+				AA0000000000000000000047 /* LlamaService.swift */,
 				AA0000000000000000000037 /* AudioPlayerService.swift */,
 				AA0000000000000000000041 /* ProgressDataService.swift */,
+				AA000000000000000000004B /* KokoroTTSService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -147,6 +178,30 @@
 				AA0000000000000000000008 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000061 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000058 /* thumb_ai_revolution.png */,
+				AA000000000000000000005A /* thumb_vintage_dress.png */,
+				AA000000000000000000005C /* thumb_enchanted_forest.png */,
+				AA000000000000000000005E /* thumb_coffee_shop.png */,
+				AA0000000000000000000060 /* thumb_comeback.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000056 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				AA000000000000000000004D /* story_ai_revolution.mp3 */,
+				AA000000000000000000004F /* story_vintage_dress.mp3 */,
+				AA0000000000000000000051 /* story_enchanted_forest.mp3 */,
+				AA0000000000000000000053 /* story_coffee_shop.mp3 */,
+				AA0000000000000000000055 /* story_comeback.mp3 */,
+			);
+			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -204,6 +259,16 @@
 			files = (
 				AA0000000000000000000007 /* Preview Assets.xcassets in Resources */,
 				AA0000000000000000000005 /* Assets.xcassets in Resources */,
+				AA000000000000000000004C /* story_ai_revolution.mp3 in Resources */,
+				AA000000000000000000004E /* story_vintage_dress.mp3 in Resources */,
+				AA0000000000000000000050 /* story_enchanted_forest.mp3 in Resources */,
+				AA0000000000000000000052 /* story_coffee_shop.mp3 in Resources */,
+				AA0000000000000000000054 /* story_comeback.mp3 in Resources */,
+				AA0000000000000000000057 /* thumb_ai_revolution.png in Resources */,
+				AA0000000000000000000059 /* thumb_vintage_dress.png in Resources */,
+				AA000000000000000000005B /* thumb_enchanted_forest.png in Resources */,
+				AA000000000000000000005D /* thumb_coffee_shop.png in Resources */,
+				AA000000000000000000005F /* thumb_comeback.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +297,8 @@
 				AA0000000000000000000040 /* ProgressDataService.swift in Sources */,
 				AA0000000000000000000042 /* RadarChartView.swift in Sources */,
 				AA0000000000000000000044 /* ProgressTrackingView.swift in Sources */,
+				AA0000000000000000000046 /* LlamaService.swift in Sources */,
+				AA000000000000000000004A /* KokoroTTSService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,6 +451,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.storytellingpractice.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "StorytellingPracticeApp/LlamaBridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -416,6 +484,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.storytellingpractice.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "StorytellingPracticeApp/LlamaBridge.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

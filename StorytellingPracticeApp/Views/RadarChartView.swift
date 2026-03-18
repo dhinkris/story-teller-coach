@@ -132,12 +132,13 @@ struct DataPoints: View {
     
     var body: some View {
         ForEach(0..<numberOfAxes, id: \.self) { index in
-            let point = calculateDataPoint(index: index, value: values[index])
-            
-            Circle()
-                .fill(Color.clayAccent)
-                .frame(width: 8, height: 8)
-                .position(point)
+            if index < values.count {
+                let point = calculateDataPoint(index: index, value: values[index])
+                Circle()
+                    .fill(Color.clayAccent)
+                    .frame(width: 8, height: 8)
+                    .position(point)
+            }
         }
     }
     
@@ -159,13 +160,14 @@ struct Labels: View {
     
     var body: some View {
         ForEach(0..<numberOfAxes, id: \.self) { index in
-            let position = calculateLabelPosition(index: index)
-            
-            Text(labels[index])
-                .font(.caption)
-                .fontWeight(.semibold)
-                .foregroundColor(.primary)
-                .position(position)
+            if index < labels.count {
+                let position = calculateLabelPosition(index: index)
+                Text(labels[index])
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary)
+                    .position(position)
+            }
         }
     }
     
