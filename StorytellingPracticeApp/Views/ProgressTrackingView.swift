@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct ProgressTrackingView: View {
-    @StateObject private var progressService = ProgressDataService()
+    @ObservedObject private var progressService = ProgressDataService.shared
     @State private var selectedPeriod: ProgressDataService.TimePeriod = .all
     @State private var showClearConfirmation = false
 
@@ -12,7 +12,7 @@ struct ProgressTrackingView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.clayBackground.ignoresSafeArea()
+                GlassBackground()
 
                 ScrollView {
                     VStack(spacing: 20) {
@@ -50,10 +50,9 @@ struct ProgressTrackingView: View {
                                 .foregroundColor(Color.clayDanger)
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .fill(Color.clayDanger.opacity(0.08))
-                                )
+                                .background(Color.clayCard)
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.clayDanger.opacity(0.35), lineWidth: 0.8))
+                                .clipShape(RoundedRectangle(cornerRadius: 20))
                             }
                             .padding(.top, 4)
                         }
@@ -216,10 +215,12 @@ struct StatBox: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
-        .background(
+        .background(Color.claySurface)
+        .overlay(
             RoundedRectangle(cornerRadius: 18)
-                .fill(color.opacity(0.08))
+                .stroke(color.opacity(0.30), lineWidth: 0.8)
         )
+        .clipShape(RoundedRectangle(cornerRadius: 18))
     }
 }
 
@@ -286,7 +287,7 @@ struct ProgressLineChart: View {
                             path.move(to: CGPoint(x: 0, y: y))
                             path.addLine(to: CGPoint(x: width, y: y))
                         }
-                        .stroke(Color.claySurface, lineWidth: 1)
+                        .stroke(Color.black.opacity(0.07), lineWidth: 1)
 
                         Text("\(Int(maxScore - (maxScore - minScore) * CGFloat(level) / 4.0))%")
                             .font(.system(size: 10))
@@ -335,6 +336,7 @@ struct ProgressLineChart: View {
                             ZStack {
                                 Circle()
                                     .fill(Color.clayCard)
+                                    .overlay(Circle().stroke(Color.clayStroke, lineWidth: 0.6))
                                     .frame(width: 10, height: 10)
                                 Circle()
                                     .fill(Color.clayAccent)
@@ -416,6 +418,7 @@ struct HistoryRow: View {
             ZStack {
                 Circle()
                     .fill(Color.clayAccent.opacity(0.10))
+                    .overlay(Circle().stroke(Color.clayAccent.opacity(0.30), lineWidth: 0.7))
                     .frame(width: 38, height: 38)
                 Image(systemName: sessionIcon)
                     .font(.system(size: 15, weight: .semibold))
@@ -459,10 +462,9 @@ struct HistoryRow: View {
         }
         .padding(.vertical, 10)
         .padding(.horizontal, 14)
-        .background(
-            RoundedRectangle(cornerRadius: 16)
-                .fill(Color.claySurface.opacity(0.6))
-        )
+        .background(Color.claySurface)
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.clayStroke, lineWidth: 0.6))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
     }
 
     private func formatDate(_ date: Date) -> String {

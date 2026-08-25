@@ -28,7 +28,6 @@
 		AA0000000000000000000042 /* RadarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000043 /* RadarChartView.swift */; };
 		AA0000000000000000000044 /* ProgressTrackingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000045 /* ProgressTrackingView.swift */; };
 		AA0000000000000000000046 /* LlamaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000047 /* LlamaService.swift */; };
-		AA0000000000000000000048 /* LlamaBridge.h in Sources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000049 /* LlamaBridge.h */; };
 		AA000000000000000000004A /* KokoroTTSService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004B /* KokoroTTSService.swift */; };
 		AA000000000000000000004C /* story_ai_revolution.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004D /* story_ai_revolution.mp3 */; };
 		AA000000000000000000004E /* story_vintage_dress.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000004F /* story_vintage_dress.mp3 */; };
@@ -40,14 +39,58 @@
 		AA000000000000000000005B /* thumb_enchanted_forest.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005C /* thumb_enchanted_forest.png */; };
 		AA000000000000000000005D /* thumb_coffee_shop.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000005E /* thumb_coffee_shop.png */; };
 		AA000000000000000000005F /* thumb_comeback.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000060 /* thumb_comeback.png */; };
+		AA0000000000000000000062 /* story_echoes_of_eternity.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000063 /* story_echoes_of_eternity.mp3 */; };
+		AA0000000000000000000064 /* story_the_last_memory_keeper.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000065 /* story_the_last_memory_keeper.mp3 */; };
+		AA0000000000000000000066 /* story_synthetic_symphony.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000067 /* story_synthetic_symphony.mp3 */; };
+		AA0000000000000000000068 /* story_rebel_threads_of_the_past.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000069 /* story_rebel_threads_of_the_past.mp3 */; };
+		AA000000000000000000006A /* story_the_robo_therapist.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006B /* story_the_robo_therapist.mp3 */; };
+		AA000000000000000000006C /* story_threads_of_her_ancestors.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006D /* story_threads_of_her_ancestors.mp3 */; };
+		AA000000000000000000006E /* story_the_memory_implant.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000006F /* story_the_memory_implant.mp3 */; };
+		AA0000000000000000000070 /* story_the_artisans_revival.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000071 /* story_the_artisans_revival.mp3 */; };
+		AA0000000000000000000072 /* story_the_robots_new_heart.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000073 /* story_the_robots_new_heart.mp3 */; };
+		AA0000000000000000000074 /* story_midnight_thrift_shop_discovery.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000075 /* story_midnight_thrift_shop_discovery.mp3 */; };
+		AA0000000000000000000076 /* story_the_virtual_nurse_dilemma.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000077 /* story_the_virtual_nurse_dilemma.mp3 */; };
+		AA0000000000000000000078 /* story_reviving_grandmas_vintage_wardrobe.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000079 /* story_reviving_grandmas_vintage_wardrobe.mp3 */; };
+		AA000000000000000000007A /* story_the_synthetic_soul_mate.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007B /* story_the_synthetic_soul_mate.mp3 */; };
+		AA000000000000000000007E /* story_the_unstoppable_kaitlyn_brown.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000007F /* story_the_unstoppable_kaitlyn_brown.mp3 */; };
+		AA0000000000000000000080 /* story_the_weightlifters_redemption.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000081 /* story_the_weightlifters_redemption.mp3 */; };
+		AA0000000000000000000082 /* story_from_rags_to_victory_lap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000083 /* story_from_rags_to_victory_lap.mp3 */; };
+		AA0000000000000000000084 /* story_the_unbreakable_sprinter.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000085 /* story_the_unbreakable_sprinter.mp3 */; };
+		AA0000000000000000000086 /* story_against_all_odds_champion.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000087 /* story_against_all_odds_champion.mp3 */; };
+		AA0000000000000000000088 /* story_the_comeback_of_courage.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000089 /* story_the_comeback_of_courage.mp3 */; };
+		AA000000000000000000008A /* story_from_fumbles_to_mvp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008B /* story_from_fumbles_to_mvp.mp3 */; };
+		AA000000000000000000008C /* story_the_unyielding_spirit_of_maya.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008D /* story_the_unyielding_spirit_of_maya.mp3 */; };
+		AA000000000000000000008E /* story_the_underdogs_rise.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000008F /* story_the_underdogs_rise.mp3 */; };
+		AA0000000000000000000090 /* thumb_echoes_of_eternity.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000091 /* thumb_echoes_of_eternity.png */; };
+		AA0000000000000000000092 /* thumb_the_last_memory_keeper.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000093 /* thumb_the_last_memory_keeper.png */; };
+		AA0000000000000000000094 /* thumb_synthetic_symphony.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000095 /* thumb_synthetic_symphony.png */; };
+		AA0000000000000000000096 /* thumb_rebel_threads_of_the_past.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000097 /* thumb_rebel_threads_of_the_past.png */; };
+		AA0000000000000000000098 /* thumb_the_robo_therapist.png in Resources */ = {isa = PBXBuildFile; fileRef = AA0000000000000000000099 /* thumb_the_robo_therapist.png */; };
+		AA000000000000000000009A /* thumb_threads_of_her_ancestors.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009B /* thumb_threads_of_her_ancestors.png */; };
+		AA000000000000000000009C /* thumb_the_memory_implant.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009D /* thumb_the_memory_implant.png */; };
+		AA000000000000000000009E /* thumb_the_artisans_revival.png in Resources */ = {isa = PBXBuildFile; fileRef = AA000000000000000000009F /* thumb_the_artisans_revival.png */; };
+		AA00000000000000000000A0 /* thumb_the_robots_new_heart.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A1 /* thumb_the_robots_new_heart.png */; };
+		AA00000000000000000000A2 /* thumb_midnight_thrift_shop_discovery.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A3 /* thumb_midnight_thrift_shop_discovery.png */; };
+		AA00000000000000000000A4 /* thumb_the_virtual_nurse_dilemma.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A5 /* thumb_the_virtual_nurse_dilemma.png */; };
+		AA00000000000000000000A6 /* thumb_reviving_grandmas_vintage_wardrobe.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A7 /* thumb_reviving_grandmas_vintage_wardrobe.png */; };
+		AA00000000000000000000A8 /* thumb_the_synthetic_soul_mate.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000A9 /* thumb_the_synthetic_soul_mate.png */; };
+		AA00000000000000000000AA /* thumb_the_unstoppable_kaitlyn_brown.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AB /* thumb_the_unstoppable_kaitlyn_brown.png */; };
+		AA00000000000000000000AC /* thumb_the_weightlifters_redemption.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AD /* thumb_the_weightlifters_redemption.png */; };
+		AA00000000000000000000AE /* thumb_from_rags_to_victory_lap.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000AF /* thumb_from_rags_to_victory_lap.png */; };
+		AA00000000000000000000B0 /* thumb_the_unbreakable_sprinter.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B1 /* thumb_the_unbreakable_sprinter.png */; };
+		AA00000000000000000000B2 /* thumb_against_all_odds_champion.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B3 /* thumb_against_all_odds_champion.png */; };
+		AA00000000000000000000B4 /* thumb_the_comeback_of_courage.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B5 /* thumb_the_comeback_of_courage.png */; };
+		AA00000000000000000000B6 /* thumb_from_fumbles_to_mvp.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B7 /* thumb_from_fumbles_to_mvp.png */; };
+		AA00000000000000000000B8 /* thumb_the_unyielding_spirit_of_maya.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000B9 /* thumb_the_unyielding_spirit_of_maya.png */; };
+		AA00000000000000000000BA /* thumb_the_underdogs_rise.png in Resources */ = {isa = PBXBuildFile; fileRef = AA00000000000000000000BB /* thumb_the_underdogs_rise.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA0000000000000000000011 /* StorytellingPracticeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorytellingPracticeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0000000000000000000002 /* StorytellingPracticeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorytellingPracticeApp.swift; sourceTree = "<group>"; };
 		AA0000000000000000000004 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA0000000000000000000006 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0000000000000000000008 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AA0000000000000000000011 /* StorytellingPracticeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StorytellingPracticeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA0000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA0000000000000000000023 /* StoryCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryCategory.swift; sourceTree = "<group>"; };
 		AA0000000000000000000025 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
@@ -78,6 +121,50 @@
 		AA000000000000000000005C /* thumb_enchanted_forest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_enchanted_forest.png; sourceTree = "<group>"; };
 		AA000000000000000000005E /* thumb_coffee_shop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_coffee_shop.png; sourceTree = "<group>"; };
 		AA0000000000000000000060 /* thumb_comeback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_comeback.png; sourceTree = "<group>"; };
+		AA0000000000000000000063 /* story_echoes_of_eternity.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_echoes_of_eternity.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000065 /* story_the_last_memory_keeper.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_last_memory_keeper.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000067 /* story_synthetic_symphony.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_synthetic_symphony.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000069 /* story_rebel_threads_of_the_past.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_rebel_threads_of_the_past.mp3; sourceTree = "<group>"; };
+		AA000000000000000000006B /* story_the_robo_therapist.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_robo_therapist.mp3; sourceTree = "<group>"; };
+		AA000000000000000000006D /* story_threads_of_her_ancestors.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_threads_of_her_ancestors.mp3; sourceTree = "<group>"; };
+		AA000000000000000000006F /* story_the_memory_implant.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_memory_implant.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000071 /* story_the_artisans_revival.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_artisans_revival.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000073 /* story_the_robots_new_heart.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_robots_new_heart.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000075 /* story_midnight_thrift_shop_discovery.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_midnight_thrift_shop_discovery.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000077 /* story_the_virtual_nurse_dilemma.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_virtual_nurse_dilemma.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000079 /* story_reviving_grandmas_vintage_wardrobe.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_reviving_grandmas_vintage_wardrobe.mp3; sourceTree = "<group>"; };
+		AA000000000000000000007B /* story_the_synthetic_soul_mate.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_synthetic_soul_mate.mp3; sourceTree = "<group>"; };
+		AA000000000000000000007F /* story_the_unstoppable_kaitlyn_brown.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_unstoppable_kaitlyn_brown.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000081 /* story_the_weightlifters_redemption.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_weightlifters_redemption.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000083 /* story_from_rags_to_victory_lap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_from_rags_to_victory_lap.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000085 /* story_the_unbreakable_sprinter.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_unbreakable_sprinter.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000087 /* story_against_all_odds_champion.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_against_all_odds_champion.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000089 /* story_the_comeback_of_courage.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_comeback_of_courage.mp3; sourceTree = "<group>"; };
+		AA000000000000000000008B /* story_from_fumbles_to_mvp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_from_fumbles_to_mvp.mp3; sourceTree = "<group>"; };
+		AA000000000000000000008D /* story_the_unyielding_spirit_of_maya.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_unyielding_spirit_of_maya.mp3; sourceTree = "<group>"; };
+		AA000000000000000000008F /* story_the_underdogs_rise.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = story_the_underdogs_rise.mp3; sourceTree = "<group>"; };
+		AA0000000000000000000091 /* thumb_echoes_of_eternity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_echoes_of_eternity.png; sourceTree = "<group>"; };
+		AA0000000000000000000093 /* thumb_the_last_memory_keeper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_last_memory_keeper.png; sourceTree = "<group>"; };
+		AA0000000000000000000095 /* thumb_synthetic_symphony.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_synthetic_symphony.png; sourceTree = "<group>"; };
+		AA0000000000000000000097 /* thumb_rebel_threads_of_the_past.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_rebel_threads_of_the_past.png; sourceTree = "<group>"; };
+		AA0000000000000000000099 /* thumb_the_robo_therapist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_robo_therapist.png; sourceTree = "<group>"; };
+		AA000000000000000000009B /* thumb_threads_of_her_ancestors.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_threads_of_her_ancestors.png; sourceTree = "<group>"; };
+		AA000000000000000000009D /* thumb_the_memory_implant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_memory_implant.png; sourceTree = "<group>"; };
+		AA000000000000000000009F /* thumb_the_artisans_revival.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_artisans_revival.png; sourceTree = "<group>"; };
+		AA00000000000000000000A1 /* thumb_the_robots_new_heart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_robots_new_heart.png; sourceTree = "<group>"; };
+		AA00000000000000000000A3 /* thumb_midnight_thrift_shop_discovery.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_midnight_thrift_shop_discovery.png; sourceTree = "<group>"; };
+		AA00000000000000000000A5 /* thumb_the_virtual_nurse_dilemma.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_virtual_nurse_dilemma.png; sourceTree = "<group>"; };
+		AA00000000000000000000A7 /* thumb_reviving_grandmas_vintage_wardrobe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_reviving_grandmas_vintage_wardrobe.png; sourceTree = "<group>"; };
+		AA00000000000000000000A9 /* thumb_the_synthetic_soul_mate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_synthetic_soul_mate.png; sourceTree = "<group>"; };
+		AA00000000000000000000AB /* thumb_the_unstoppable_kaitlyn_brown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_unstoppable_kaitlyn_brown.png; sourceTree = "<group>"; };
+		AA00000000000000000000AD /* thumb_the_weightlifters_redemption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_weightlifters_redemption.png; sourceTree = "<group>"; };
+		AA00000000000000000000AF /* thumb_from_rags_to_victory_lap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_from_rags_to_victory_lap.png; sourceTree = "<group>"; };
+		AA00000000000000000000B1 /* thumb_the_unbreakable_sprinter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_unbreakable_sprinter.png; sourceTree = "<group>"; };
+		AA00000000000000000000B3 /* thumb_against_all_odds_champion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_against_all_odds_champion.png; sourceTree = "<group>"; };
+		AA00000000000000000000B5 /* thumb_the_comeback_of_courage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_comeback_of_courage.png; sourceTree = "<group>"; };
+		AA00000000000000000000B7 /* thumb_from_fumbles_to_mvp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_from_fumbles_to_mvp.png; sourceTree = "<group>"; };
+		AA00000000000000000000B9 /* thumb_the_unyielding_spirit_of_maya.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_unyielding_spirit_of_maya.png; sourceTree = "<group>"; };
+		AA00000000000000000000BB /* thumb_the_underdogs_rise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumb_the_underdogs_rise.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,14 +186,6 @@
 			);
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000016 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000000000000000000011 /* StorytellingPracticeApp.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		AA0000000000000000000015 /* StorytellingPracticeApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +203,22 @@
 				AA0000000000000000000012 /* Info.plist */,
 			);
 			path = StorytellingPracticeApp;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000016 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000011 /* StorytellingPracticeApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA0000000000000000000017 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000000000000000000008 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		AA0000000000000000000038 /* Models */ = {
@@ -172,12 +267,38 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		AA0000000000000000000017 /* Preview Content */ = {
+		AA0000000000000000000056 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				AA0000000000000000000008 /* Preview Assets.xcassets */,
+				AA000000000000000000004D /* story_ai_revolution.mp3 */,
+				AA000000000000000000004F /* story_vintage_dress.mp3 */,
+				AA0000000000000000000051 /* story_enchanted_forest.mp3 */,
+				AA0000000000000000000053 /* story_coffee_shop.mp3 */,
+				AA0000000000000000000055 /* story_comeback.mp3 */,
+				AA0000000000000000000063 /* story_echoes_of_eternity.mp3 */,
+				AA0000000000000000000065 /* story_the_last_memory_keeper.mp3 */,
+				AA0000000000000000000067 /* story_synthetic_symphony.mp3 */,
+				AA0000000000000000000069 /* story_rebel_threads_of_the_past.mp3 */,
+				AA000000000000000000006B /* story_the_robo_therapist.mp3 */,
+				AA000000000000000000006D /* story_threads_of_her_ancestors.mp3 */,
+				AA000000000000000000006F /* story_the_memory_implant.mp3 */,
+				AA0000000000000000000071 /* story_the_artisans_revival.mp3 */,
+				AA0000000000000000000073 /* story_the_robots_new_heart.mp3 */,
+				AA0000000000000000000075 /* story_midnight_thrift_shop_discovery.mp3 */,
+				AA0000000000000000000077 /* story_the_virtual_nurse_dilemma.mp3 */,
+				AA0000000000000000000079 /* story_reviving_grandmas_vintage_wardrobe.mp3 */,
+				AA000000000000000000007B /* story_the_synthetic_soul_mate.mp3 */,
+				AA000000000000000000007F /* story_the_unstoppable_kaitlyn_brown.mp3 */,
+				AA0000000000000000000081 /* story_the_weightlifters_redemption.mp3 */,
+				AA0000000000000000000083 /* story_from_rags_to_victory_lap.mp3 */,
+				AA0000000000000000000085 /* story_the_unbreakable_sprinter.mp3 */,
+				AA0000000000000000000087 /* story_against_all_odds_champion.mp3 */,
+				AA0000000000000000000089 /* story_the_comeback_of_courage.mp3 */,
+				AA000000000000000000008B /* story_from_fumbles_to_mvp.mp3 */,
+				AA000000000000000000008D /* story_the_unyielding_spirit_of_maya.mp3 */,
+				AA000000000000000000008F /* story_the_underdogs_rise.mp3 */,
 			);
-			path = "Preview Content";
+			path = Audio;
 			sourceTree = "<group>";
 		};
 		AA0000000000000000000061 /* Images */ = {
@@ -188,20 +309,30 @@
 				AA000000000000000000005C /* thumb_enchanted_forest.png */,
 				AA000000000000000000005E /* thumb_coffee_shop.png */,
 				AA0000000000000000000060 /* thumb_comeback.png */,
+				AA0000000000000000000091 /* thumb_echoes_of_eternity.png */,
+				AA0000000000000000000093 /* thumb_the_last_memory_keeper.png */,
+				AA0000000000000000000095 /* thumb_synthetic_symphony.png */,
+				AA0000000000000000000097 /* thumb_rebel_threads_of_the_past.png */,
+				AA0000000000000000000099 /* thumb_the_robo_therapist.png */,
+				AA000000000000000000009B /* thumb_threads_of_her_ancestors.png */,
+				AA000000000000000000009D /* thumb_the_memory_implant.png */,
+				AA000000000000000000009F /* thumb_the_artisans_revival.png */,
+				AA00000000000000000000A1 /* thumb_the_robots_new_heart.png */,
+				AA00000000000000000000A3 /* thumb_midnight_thrift_shop_discovery.png */,
+				AA00000000000000000000A5 /* thumb_the_virtual_nurse_dilemma.png */,
+				AA00000000000000000000A7 /* thumb_reviving_grandmas_vintage_wardrobe.png */,
+				AA00000000000000000000A9 /* thumb_the_synthetic_soul_mate.png */,
+				AA00000000000000000000AB /* thumb_the_unstoppable_kaitlyn_brown.png */,
+				AA00000000000000000000AD /* thumb_the_weightlifters_redemption.png */,
+				AA00000000000000000000AF /* thumb_from_rags_to_victory_lap.png */,
+				AA00000000000000000000B1 /* thumb_the_unbreakable_sprinter.png */,
+				AA00000000000000000000B3 /* thumb_against_all_odds_champion.png */,
+				AA00000000000000000000B5 /* thumb_the_comeback_of_courage.png */,
+				AA00000000000000000000B7 /* thumb_from_fumbles_to_mvp.png */,
+				AA00000000000000000000B9 /* thumb_the_unyielding_spirit_of_maya.png */,
+				AA00000000000000000000BB /* thumb_the_underdogs_rise.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		AA0000000000000000000056 /* Audio */ = {
-			isa = PBXGroup;
-			children = (
-				AA000000000000000000004D /* story_ai_revolution.mp3 */,
-				AA000000000000000000004F /* story_vintage_dress.mp3 */,
-				AA0000000000000000000051 /* story_enchanted_forest.mp3 */,
-				AA0000000000000000000053 /* story_coffee_shop.mp3 */,
-				AA0000000000000000000055 /* story_comeback.mp3 */,
-			);
-			path = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +400,50 @@
 				AA000000000000000000005B /* thumb_enchanted_forest.png in Resources */,
 				AA000000000000000000005D /* thumb_coffee_shop.png in Resources */,
 				AA000000000000000000005F /* thumb_comeback.png in Resources */,
+				AA0000000000000000000062 /* story_echoes_of_eternity.mp3 in Resources */,
+				AA0000000000000000000064 /* story_the_last_memory_keeper.mp3 in Resources */,
+				AA0000000000000000000066 /* story_synthetic_symphony.mp3 in Resources */,
+				AA0000000000000000000068 /* story_rebel_threads_of_the_past.mp3 in Resources */,
+				AA000000000000000000006A /* story_the_robo_therapist.mp3 in Resources */,
+				AA000000000000000000006C /* story_threads_of_her_ancestors.mp3 in Resources */,
+				AA000000000000000000006E /* story_the_memory_implant.mp3 in Resources */,
+				AA0000000000000000000070 /* story_the_artisans_revival.mp3 in Resources */,
+				AA0000000000000000000072 /* story_the_robots_new_heart.mp3 in Resources */,
+				AA0000000000000000000074 /* story_midnight_thrift_shop_discovery.mp3 in Resources */,
+				AA0000000000000000000076 /* story_the_virtual_nurse_dilemma.mp3 in Resources */,
+				AA0000000000000000000078 /* story_reviving_grandmas_vintage_wardrobe.mp3 in Resources */,
+				AA000000000000000000007A /* story_the_synthetic_soul_mate.mp3 in Resources */,
+				AA000000000000000000007E /* story_the_unstoppable_kaitlyn_brown.mp3 in Resources */,
+				AA0000000000000000000080 /* story_the_weightlifters_redemption.mp3 in Resources */,
+				AA0000000000000000000082 /* story_from_rags_to_victory_lap.mp3 in Resources */,
+				AA0000000000000000000084 /* story_the_unbreakable_sprinter.mp3 in Resources */,
+				AA0000000000000000000086 /* story_against_all_odds_champion.mp3 in Resources */,
+				AA0000000000000000000088 /* story_the_comeback_of_courage.mp3 in Resources */,
+				AA000000000000000000008A /* story_from_fumbles_to_mvp.mp3 in Resources */,
+				AA000000000000000000008C /* story_the_unyielding_spirit_of_maya.mp3 in Resources */,
+				AA000000000000000000008E /* story_the_underdogs_rise.mp3 in Resources */,
+				AA0000000000000000000090 /* thumb_echoes_of_eternity.png in Resources */,
+				AA0000000000000000000092 /* thumb_the_last_memory_keeper.png in Resources */,
+				AA0000000000000000000094 /* thumb_synthetic_symphony.png in Resources */,
+				AA0000000000000000000096 /* thumb_rebel_threads_of_the_past.png in Resources */,
+				AA0000000000000000000098 /* thumb_the_robo_therapist.png in Resources */,
+				AA000000000000000000009A /* thumb_threads_of_her_ancestors.png in Resources */,
+				AA000000000000000000009C /* thumb_the_memory_implant.png in Resources */,
+				AA000000000000000000009E /* thumb_the_artisans_revival.png in Resources */,
+				AA00000000000000000000A0 /* thumb_the_robots_new_heart.png in Resources */,
+				AA00000000000000000000A2 /* thumb_midnight_thrift_shop_discovery.png in Resources */,
+				AA00000000000000000000A4 /* thumb_the_virtual_nurse_dilemma.png in Resources */,
+				AA00000000000000000000A6 /* thumb_reviving_grandmas_vintage_wardrobe.png in Resources */,
+				AA00000000000000000000A8 /* thumb_the_synthetic_soul_mate.png in Resources */,
+				AA00000000000000000000AA /* thumb_the_unstoppable_kaitlyn_brown.png in Resources */,
+				AA00000000000000000000AC /* thumb_the_weightlifters_redemption.png in Resources */,
+				AA00000000000000000000AE /* thumb_from_rags_to_victory_lap.png in Resources */,
+				AA00000000000000000000B0 /* thumb_the_unbreakable_sprinter.png in Resources */,
+				AA00000000000000000000B2 /* thumb_against_all_odds_champion.png in Resources */,
+				AA00000000000000000000B4 /* thumb_the_comeback_of_courage.png in Resources */,
+				AA00000000000000000000B6 /* thumb_from_fumbles_to_mvp.png in Resources */,
+				AA00000000000000000000B8 /* thumb_the_unyielding_spirit_of_maya.png in Resources */,
+				AA00000000000000000000BA /* thumb_the_underdogs_rise.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +607,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StorytellingPracticeApp/Preview Content\"";
+				DEVELOPMENT_TEAM = HZJ7SD392T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StorytellingPracticeApp/Info.plist;
@@ -451,7 +627,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.storytellingpractice.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "StorytellingPracticeApp/LlamaBridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = StorytellingPracticeApp/LlamaBridge.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -465,6 +641,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"StorytellingPracticeApp/Preview Content\"";
+				DEVELOPMENT_TEAM = HZJ7SD392T;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StorytellingPracticeApp/Info.plist;
@@ -484,7 +661,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.storytellingpractice.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_OBJC_BRIDGING_HEADER = "StorytellingPracticeApp/LlamaBridge.h";
+				SWIFT_OBJC_BRIDGING_HEADER = StorytellingPracticeApp/LlamaBridge.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -493,20 +670,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AA000000000000000000001D /* Build configuration list for PBXProject "StorytellingPracticeApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AA000000000000000000001E /* Debug */,
-				AA000000000000000000001F /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		AA0000000000000000000019 /* Build configuration list for PBXNativeTarget "StorytellingPracticeApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA0000000000000000000020 /* Debug */,
 				AA0000000000000000000021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA000000000000000000001D /* Build configuration list for PBXProject "StorytellingPracticeApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA000000000000000000001E /* Debug */,
+				AA000000000000000000001F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

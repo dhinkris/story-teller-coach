@@ -1,5 +1,6 @@
 import SwiftUI
 import os.log
+import UIKit
 
 private let practiceLogger = Logger(subsystem: "com.storytellingpractice.app", category: "FreePracticeView")
 
@@ -17,12 +18,12 @@ struct FreePracticeView: View {
     @StateObject private var recorder = AudioRecorderService()
     @StateObject private var speechRecognizer = SpeechRecognitionService()
     @StateObject private var llmService = LLMService()
-    @StateObject private var progressService = ProgressDataService()
+    @ObservedObject private var progressService = ProgressDataService.shared
 
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.clayBackground.ignoresSafeArea()
+                GlassBackground()
 
                 if let prompt = currentPrompt {
                     // Prompt active
@@ -41,7 +42,7 @@ struct FreePracticeView: View {
                                 }
                                 .padding(.horizontal, 20)
 
-                                RecordingView(
+                                PracticeRecordingCard(
                                     isRecording: $isRecording,
                                     recorder: recorder,
                                     onRecordComplete: { audioURL, duration in
@@ -174,19 +175,19 @@ struct PracticeSetupView: View {
                     ZStack {
                         Circle()
                             .fill(Color.clayCard)
+                            .overlay(Circle().stroke(Color.clayStroke, lineWidth: 0.8))
                             .frame(width: 120, height: 120)
-                            .shadow(color: Color.clayShadow,      radius: 20, x: 10,  y: 10)
-                            .shadow(color: Color.clayShadowLight, radius: 20, x: -10, y: -10)
+                            .shadow(color: Color.clayShadow, radius: 14, x: 0, y: 6)
 
-                        Image(systemName: "bolt.fill")
+                        Image(systemName: "flame.fill")
                             .font(.system(size: 48))
                             .foregroundColor(Color.clayAccent)
                     }
 
-                    Text("Open Practice")
+                    Text("Creative Challenge")
                         .font(.system(size: 26, weight: .bold, design: .rounded))
 
-                    Text("Get a random prompt and tell the best story you can. No script, no rules — just you and the moment.")
+                    Text("Get inspired by a prompt and craft your story in real time. Unleash your creativity.")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -235,8 +236,8 @@ struct PracticeSetupView: View {
                             ProgressView()
                                 .progressViewStyle(CircularProgressViewStyle(tint: .white))
                         } else {
-                            Image(systemName: "bolt.fill")
-                            Text("Generate Challenge")
+                            Image(systemName: "sparkles")
+                            Text("Get Inspired")
                         }
                     }
                     .font(.headline)
@@ -290,10 +291,16 @@ struct PracticeCategoryTile: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 16)
             .background(
-                RoundedRectangle(cornerRadius: 18)
-                    .fill(isSelected ? color : Color.clayCard)
-                    .shadow(color: isSelected ? color.opacity(0.28) : Color.clayShadow, radius: isSelected ? 8 : 6, x: 0, y: isSelected ? 4 : 3)
-                    .shadow(color: isSelected ? .clear : Color.clayShadowLight, radius: 6, x: -3, y: -3)
+                Group {
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 18).fill(color)
+                            .shadow(color: color.opacity(0.45), radius: 10, x: 0, y: 4)
+                    } else {
+                        RoundedRectangle(cornerRadius: 12).fill(Color.clayCard)
+                            .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.clayStroke, lineWidth: 0.8))
+                            .shadow(color: Color.clayShadow, radius: 4, x: 0, y: 2)
+                    }
+                }
             )
         }
         .buttonStyle(ScaleButtonStyle())
@@ -379,12 +386,86 @@ struct ChallengeCard: View {
                     .padding(.top, 4)
                 }
             }
-            .padding(20)
+            .padding(18)
             .background(Color.clayCard)
         }
-        .clipShape(RoundedRectangle(cornerRadius: 22))
-        .shadow(color: Color.clayShadow,      radius: 12, x: 5,  y: 5)
-        .shadow(color: Color.clayShadowLight, radius: 12, x: -5, y: -5)
+        .clipShape(RoundedRectangle(cornerRadius: 14))
+        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.clayStroke, lineWidth: 0.8))
+        .shadow(color: Color.clayShadow, radius: 8, x: 0, y: 3)
+    }
+}
+
+// MARK: - Practice Recording Card
+
+struct PracticeRecordingCard: View {
+    @Binding var isRecording: Bool
+    @ObservedObject var recorder: AudioRecorderService
+    let onRecordComplete: (URL, TimeInterval) async -> Void
+    var onError: (String) -> Void = { _ in }
+
+    @State private var pulseScale: CGFloat = 1.0
+
+    var body: some View {
+        VStack(spacing: 24) {
+            // Waveform
+            WaveformView(isActive: isRecording)
+                .frame(height: 80)
+
+            // Timer
+            Text(formatTime(recorder.recordingDuration))
+                .font(.system(size: 52, weight: .thin, design: .monospaced))
+                .foregroundColor(isRecording ? Color.clayDanger : .primary.opacity(0.45))
+                .contentTransition(.numericText())
+                .animation(.easeInOut(duration: 0.2), value: isRecording)
+
+            Text(isRecording ? "Recording your performance…" : "Tap to start your performance")
+                .font(.subheadline)
+                .foregroundColor(.secondary)
+
+            // Record button + pulse rings
+            ZStack {
+                if isRecording {
+                    ForEach(0..<2) { i in
+                        Circle()
+                            .stroke(Color.clayDanger.opacity(0.12 - Double(i) * 0.04), lineWidth: 1.5)
+                            .frame(width: CGFloat(108 + i * 26), height: CGFloat(108 + i * 26))
+                            .scaleEffect(pulseScale)
+                            .animation(
+                                .easeInOut(duration: 1.3).repeatForever(autoreverses: true).delay(Double(i) * 0.3),
+                                value: pulseScale
+                            )
+                    }
+                }
+                RecordButton(isRecording: isRecording) {
+                    if isRecording { stopRecording() } else { startRecording() }
+                }
+            }
+            .frame(height: 140)
+        }
+        .clayCard(cornerRadius: 28, padding: 28)
+        .onChange(of: isRecording) { recording in
+            pulseScale = recording ? 1.14 : 1.0
+        }
+    }
+
+    private func startRecording() {
+        do {
+            try recorder.startRecording()
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) { isRecording = true }
+        } catch { onError(error.localizedDescription) }
+    }
+
+    private func stopRecording() {
+        guard let audioURL = recorder.stopRecording() else { return }
+        let duration = recorder.recordingDuration
+        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+        withAnimation { isRecording = false }
+        Task { await onRecordComplete(audioURL, duration) }
+    }
+
+    private func formatTime(_ t: TimeInterval) -> String {
+        String(format: "%02d:%02d", Int(t) / 60, Int(t) % 60)
     }
 }
 
@@ -416,17 +497,25 @@ struct PracticeResultsView: View {
                         .foregroundColor(.secondary)
                 }
                 .padding(.top, 8)
+                .onAppear {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            UINotificationFeedbackGenerator().notificationOccurred(.success)
+                        }
+                    }
+                }
 
                 // Score circle
                 ZStack {
                     Circle()
                         .fill(Color.clayCard)
+                        .overlay(Circle().stroke(Color.clayStroke, lineWidth: 0.8))
                         .frame(width: 148, height: 148)
-                        .shadow(color: Color.clayShadow,      radius: 20, x: 10,  y: 10)
-                        .shadow(color: Color.clayShadowLight, radius: 20, x: -10, y: -10)
+                        .shadow(color: Color.clayShadow, radius: 14, x: 0, y: 6)
 
                     Circle()
-                        .stroke(performanceColor(for: metrics.overallScore).opacity(0.25), lineWidth: 7)
+                        .stroke(performanceColor(for: metrics.overallScore).opacity(0.60), lineWidth: 7)
                         .frame(width: 136, height: 136)
 
                     Text("\(metrics.overallPercentage)%")
@@ -434,8 +523,12 @@ struct PracticeResultsView: View {
                         .foregroundColor(performanceColor(for: metrics.overallScore))
                 }
 
+                if let recording {
+                    RecordingPlaybackCard(audioURL: recording.audioURL)
+                }
+
                 // Craft metrics
-                VStack(spacing: 18) {
+                VStack(spacing: 16) {
                     HStack {
                         Text("Craft Breakdown")
                             .font(.headline)
@@ -443,12 +536,16 @@ struct PracticeResultsView: View {
                         Spacer()
                     }
 
-                    MetricRow(title: "Narrative Arc",  score: metrics.similarityScore, percentage: metrics.similarityPercentage, icon: "arrow.triangle.branch")
-                    MetricRow(title: "Delivery",        score: metrics.fluencyScore,    percentage: metrics.fluencyPercentage,    icon: "waveform")
-                    MetricRow(title: "Story Flow",      score: metrics.coherenceScore,  percentage: metrics.coherencePercentage,  icon: "arrow.triangle.turn.up.right.diamond")
-                    MetricRow(title: "Word Choice",     score: metrics.vocabularyScore, percentage: metrics.vocabularyPercentage, icon: "textformat.abc")
+                    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
+                        ArcGauge(title: "Narrative Arc", score: metrics.similarityScore, icon: "arrow.triangle.branch",                       delay: 0.3)
+                        ArcGauge(title: "Delivery",       score: metrics.fluencyScore,    icon: "waveform",                                    delay: 0.45)
+                        ArcGauge(title: "Story Flow",     score: metrics.coherenceScore,  icon: "arrow.triangle.turn.up.right.diamond",        delay: 0.6)
+                        ArcGauge(title: "Word Choice",    score: metrics.vocabularyScore, icon: "textformat.abc",                              delay: 0.75)
+                    }
                 }
                 .clayCard(cornerRadius: 28, padding: 22)
+
+                if let bd = metrics.breakdown { DiagnosticsCard(breakdown: bd, isPractice: true) }
 
                 // Suggestions
                 if !metrics.suggestions.isEmpty {

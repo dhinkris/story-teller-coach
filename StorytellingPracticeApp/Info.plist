@@ -8,6 +8,9 @@
 	<string>This app needs speech recognition to transcribe your recordings.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app needs camera access to generate images for prompts.</string>
+	<!-- Classic opaque bars (Balance-style solid white tab bar) instead of iOS 26 liquid glass -->
+	<key>UIDesignRequiresCompatibility</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<!-- Allow HTTP to localhost for Ollama (llama3.1:8b at port 11434) -->

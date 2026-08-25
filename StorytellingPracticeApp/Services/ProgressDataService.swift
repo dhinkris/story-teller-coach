@@ -1,6 +1,10 @@
 import Foundation
 
 class ProgressDataService: ObservableObject {
+    /// Single source of truth shared across tabs — each tab creating its own
+    /// instance would never see sessions saved from the others.
+    static let shared = ProgressDataService()
+
     @Published var records: [ProgressRecord] = []
     @Published var overallProgress: OverallProgress = OverallProgress()
     

@@ -15,6 +15,24 @@ class AudioRecorderService: NSObject, ObservableObject {
         AVAudioSession.sharedInstance()
     }
     
+    /// Recordings are only needed for the session they were made in; without
+    /// cleanup they accumulate in Documents indefinitely.
+    static func cleanUpStaleRecordings(olderThan age: TimeInterval = 24 * 60 * 60) {
+        let documentsPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        guard let files = try? FileManager.default.contentsOfDirectory(
+            at: documentsPath,
+            includingPropertiesForKeys: [.contentModificationDateKey]
+        ) else { return }
+
+        let cutoff = Date().addingTimeInterval(-age)
+        for file in files where file.lastPathComponent.hasPrefix("recording_") && file.pathExtension == "m4a" {
+            let modified = (try? file.resourceValues(forKeys: [.contentModificationDateKey]))?.contentModificationDate
+            if let modified, modified < cutoff {
+                try? FileManager.default.removeItem(at: file)
+            }
+        }
+    }
+
     func requestPermission() async -> Bool {
         await withCheckedContinuation { continuation in
             audioSession.requestRecordPermission { granted in
@@ -35,7 +53,8 @@ class AudioRecorderService: NSObject, ObservableObject {
         let audioFilename = documentsPath.appendingPathComponent("recording_\(UUID().uuidString).m4a")
         
         do {
-            try audioSession.setCategory(.playAndRecord, mode: .default)
+            // .defaultToSpeaker — otherwise playAndRecord routes playback to the quiet earpiece
+            try audioSession.setCategory(.playAndRecord, mode: .default, options: [.defaultToSpeaker, .allowBluetooth])
             try audioSession.setActive(true)
             
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -46,10 +65,12 @@ class AudioRecorderService: NSObject, ObservableObject {
             startTime = Date()
             recordingDuration = 0
             
-            recordingTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+            let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
                 guard let self = self, let startTime = self.startTime else { return }
                 self.recordingDuration = Date().timeIntervalSince(startTime)
             }
+            RunLoop.main.add(timer, forMode: .common)
+            recordingTimer = timer
         } catch {
             recordingError = error
             throw error

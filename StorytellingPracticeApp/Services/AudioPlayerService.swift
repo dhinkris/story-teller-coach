@@ -12,6 +12,8 @@ class AudioPlayerService: NSObject, ObservableObject {
     private var playbackTimer: Timer?
     
     func loadAudio(from url: URL) throws {
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+        try AVAudioSession.sharedInstance().setActive(true)
         audioPlayer = try AVAudioPlayer(contentsOf: url)
         audioPlayer?.delegate = self
         audioPlayer?.prepareToPlay()
@@ -22,10 +24,13 @@ class AudioPlayerService: NSObject, ObservableObject {
         audioPlayer?.play()
         isPlaying = true
         
-        playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] _ in
+        let timer = Timer(timeInterval: 0.1, repeats: true) { [weak self] _ in
             guard let self = self, let player = self.audioPlayer else { return }
             self.currentTime = player.currentTime
         }
+        // .common keeps the progress updating while the user scrolls or drags the slider
+        RunLoop.main.add(timer, forMode: .common)
+        playbackTimer = timer
     }
     
     func pause() {
